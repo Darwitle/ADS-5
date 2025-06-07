@@ -62,7 +62,7 @@ return postfix;
 
 int eval(const std::string& post) {
 TStack<int, 100> countStack;
-std::string ccurrentNumber;
+std::string currentNumber;
 for (int i = 0; i < post.length(); ++i) {
 char ccurSym = post[i];
 if (isdigit(ccurSym)) {
