@@ -16,7 +16,7 @@ default : return -1;
 }
 
 std::string infx2pstfx(const std::string& inf) {
-std::string postfix = "";
+std::string postfix = ""; // NOLINT(runtime/string)
 TStack<char, 100> transStack;
 
 for (int i = 0; i < inf.length(); ++i) {
@@ -62,7 +62,7 @@ return postfix;
 
 int eval(const std::string& post) {
 TStack<int, 100> countStack;
-std::string currentNumber;
+std::string currentNumber; // NOLINT(runtime/string)
 for (int i = 0; i < post.length(); ++i) {
 char ccurSym = post[i];
 if (isdigit(ccurSym)) {
