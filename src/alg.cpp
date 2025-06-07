@@ -16,7 +16,7 @@ int priority(char sym) {
 }
 
 std::string infx2pstfx(const std::string& inf) {
-  std::string spostfix = "";
+  std::string postfix = "";
   TStack<char, 100> transStack;
 
   for (int i = 0; i < inf.length(); ++i) {
@@ -28,13 +28,13 @@ std::string infx2pstfx(const std::string& inf) {
               i++;
           }
           i--;
-          spostfix += num + " ";
+          postfix += num + " ";
       } else if (cur == '(') {
           transStack.push(cur);
       } else if (cur == ')') {
           while (!transStack.isEmpty() && transStack.get() != '(') {
-              spostfix += transStack.pop();
-              spostfix += " ";
+              postfix += transStack.pop();
+              postfix += " ";
           }
           if (!transStack.isEmpty() && transStack.get() == '(') {
               transStack.pop();
@@ -42,8 +42,8 @@ std::string infx2pstfx(const std::string& inf) {
       } else if (cur == '+' || cur == '-' || cur == '*' || cur == '/') {
           while (!transStack.isEmpty()
             && priority(cur) <= priority(transStack.get())) {
-              spostfix += transStack.pop();
-              spostfix += " ";
+              postfix += transStack.pop();
+              postfix += " ";
           }
           transStack.push(cur);
       } else if (cur == ' ') {
@@ -51,13 +51,13 @@ std::string infx2pstfx(const std::string& inf) {
       }
   }
   while (!transStack.isEmpty()) {
-      spostfix += transStack.pop();
-      spostfix += " ";
+      postfix += transStack.pop();
+      postfix += " ";
   }
-  if (!postfix.empty() && spostfix.back() == ' ') {
-     spostfix.pop_back();
+  if (!postfix.empty() && postfix.back() == ' ') {
+     postfix.pop_back();
   }
-    return spostfix;
+    return postfix;
 }
 
 int eval(const std::string& post) {
